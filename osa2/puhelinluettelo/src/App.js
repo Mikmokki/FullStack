@@ -39,7 +39,7 @@ const App = () => {
                     .catch(error => {
                         console.log(error);
                         setStyle("error")
-                        setErrorMessage("Updating failed")
+                        setErrorMessage(error)
                     })
             }
         }
@@ -53,9 +53,10 @@ const App = () => {
                     setNewNumber('')
                 })
                 .catch(error => {
-                    console.log(error);
+                    console.log("toimis jo")
+                    console.log(error.response.data)
                     setStyle("error")
-                    setErrorMessage("Creating new person failed")
+                    setErrorMessage(error.response.data.error)
                 })
 
         }
