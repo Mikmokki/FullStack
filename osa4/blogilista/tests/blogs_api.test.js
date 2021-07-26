@@ -87,10 +87,23 @@ test('new blogs has 0 likes if not specified', async () => {
         .expect(201)
         .expect('Content-Type', /application\/json/)
 
-    const blog = await Blog.findById({ author: 'MJ' })
+    const blog = await Blog.find({ author: 'MJ' })
     console.log('blogsAfter: ', blog)
 
-    expect(blog.likes).toBe(0)
+    expect(blog[0].likes).toBe(0)
+})
+
+test(' if title is empty, 400 Bad request is returned', async () => {
+    const newPost = {
+        author: 'kirjuri',
+        url: 'notitleblogs.blog',
+        likes: 1
+    }
+
+    await api
+        .post('/api/blogs')
+        .send(newPost)
+        .expect(400)
 })
 
 
