@@ -1,4 +1,4 @@
-
+let clearingId = 0
 export const clearNotification = () => {
     return {
         type: 'CLEAR_NOTIFICATION'
@@ -10,7 +10,8 @@ export const setNotification = (notification, time) => {
             type: 'SET_NOTIFICATION',
             data: { notification }
         })
-        setTimeout(() => dispatch(clearNotification()), time * 1000)
+        clearTimeout(clearingId)
+        clearingId = setTimeout(() => dispatch(clearNotification()), time * 1000)
     }
 }
 const notificationReducer = (state = '', action) => {
